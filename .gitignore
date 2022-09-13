@@ -3,6 +3,10 @@
 # dependencies
 node_modules
 
+# ignore build artifacts
+builds
+/frontend/build
+
 # IDEs and editors
 /.idea
 /.vscode
