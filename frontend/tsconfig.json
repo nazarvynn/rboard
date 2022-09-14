@@ -14,7 +14,10 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "paths": {
+      "@interfaces": ["src/common/interfaces"]
+    }
   },
   "include": ["src"],
   "exclude": ["node_modules"]

@@ -1,9 +1,11 @@
+import { CustomMuiTheme } from '@interfaces';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import MenuIcon from '@mui/icons-material/Menu';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import Badge from '@mui/material/Badge';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
@@ -13,7 +15,7 @@ import IconButton from '@mui/material/IconButton';
 import Link from '@mui/material/Link';
 import List from '@mui/material/List';
 import Paper from '@mui/material/Paper';
-import { createTheme, styled, ThemeProvider } from '@mui/material/styles';
+import { styled, ThemeProvider } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import React from 'react';
@@ -22,6 +24,7 @@ import Chart from '../../../components/Chart/Chart';
 import Deposits from '../../../components/Deposits/Deposits';
 import { mainListItems, secondaryListItems } from '../../../components/ListItems/ListItems';
 import Orders from '../../../components/Orders/Orders';
+import { RBoardTheme } from '../../../theme/theme';
 
 function Copyright(props: any) {
   return (
@@ -40,22 +43,23 @@ const drawerWidth = 240;
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
+  theme?: CustomMuiTheme;
 }
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
-})<AppBarProps>(({ theme, open }) => ({
-  zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(['width', 'margin'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
+})<AppBarProps>(({ theme, open }: AppBarProps) => ({
+  zIndex: theme!.zIndex.drawer + 1,
+  transition: theme!.transitions.create(['width', 'margin'], {
+    easing: theme!.transitions.easing.sharp,
+    duration: theme!.transitions.duration.leavingScreen,
   }),
   ...(open && {
-    marginLeft: drawerWidth,
+    marginLeft: theme!.layout.sidebarWidth,
     width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
+    transition: theme!.transitions.create(['width', 'margin'], {
+      easing: theme!.transitions.easing.sharp,
+      duration: theme!.transitions.duration.enteringScreen,
     }),
   }),
 }));
@@ -84,8 +88,6 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   },
 }));
 
-const mdTheme = createTheme();
-
 function DashboardContent() {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
@@ -93,7 +95,7 @@ function DashboardContent() {
   };
 
   return (
-    <ThemeProvider theme={mdTheme}>
+    <ThemeProvider theme={RBoardTheme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <AppBar position="absolute" open={open}>
@@ -152,10 +154,13 @@ function DashboardContent() {
             flexGrow: 1,
             height: '100vh',
             overflow: 'auto',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'stretch',
           }}
         >
           <Toolbar />
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+          <Container maxWidth={false} sx={{ mt: 4, mb: 4, display: 'flex', flexDirection: 'column', flex: 1 }}>
             <Grid container spacing={3}>
               {/* Chart */}
               <Grid item xs={12} md={8} lg={9}>
@@ -189,8 +194,11 @@ function DashboardContent() {
                   <Orders />
                 </Paper>
               </Grid>
+              <Button variant="contained">Contained</Button>
             </Grid>
-            <Copyright sx={{ pt: 4 }} />
+            <Box component="footer" sx={{ mt: 'auto' }}>
+              <Copyright sx={{ pt: 4 }} />
+            </Box>
           </Container>
         </Box>
       </Box>
