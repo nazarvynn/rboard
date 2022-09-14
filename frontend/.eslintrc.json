@@ -26,7 +26,8 @@
     "prefer-const": "error",
     "no-use-before-define": "error",
     "no-debugger": "error",
-    "no-console": ["error", { "allow": ["warn", "error"] }]
+    "no-console": ["error", { "allow": ["warn", "error"] }],
+    "@typescript-eslint/no-unused-vars": "error"
   },
   "ignorePatterns": ["*.json", "**/*.json"]
 }

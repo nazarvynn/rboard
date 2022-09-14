@@ -1,7 +1,8 @@
 import React from 'react';
+import RBRoutes from './routes/RBRoutes';
 
 function App() {
-  return <div>RBoard</div>;
+  return <RBRoutes />;
 }
 
 export default App;
