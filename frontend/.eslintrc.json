@@ -9,7 +9,7 @@
     "plugin:@typescript-eslint/recommended"
   ],
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
+  "plugins": ["@typescript-eslint", "import", "simple-import-sort"],
   "parserOptions": {
     "ecmaVersion": 12,
     "sourceType": "module"
@@ -27,7 +27,25 @@
     "no-use-before-define": "error",
     "no-debugger": "error",
     "no-console": ["error", { "allow": ["warn", "error"] }],
-    "@typescript-eslint/no-unused-vars": "error"
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-explicit-any": "off",
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
+    "import/first": "error",
+    "import/newline-after-import": "error",
+    "import/no-duplicates": "error"
   },
-  "ignorePatterns": ["*.json", "**/*.json"]
+  "ignorePatterns": [
+    "/.cache",
+    "/.git",
+    "/.husky",
+    "/.yarn",
+    "/*/dist/",
+    "/**/__snapshots__",
+    "/**/node_modules",
+    "/coverage",
+    "/dist/",
+    "*.json",
+    "**/*.json"
+  ]
 }
